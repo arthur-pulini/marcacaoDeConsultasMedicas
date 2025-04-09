@@ -1,8 +1,20 @@
-import { registerRootComponent } from 'expo';
+import React from 'react';
+import { AuthProvider } from './src/contexts/AuthContext';
+import { AppNavigator } from './src/navigation/AppNavigator';
+import { ThemeProvider } from 'styled-components/native';
+import theme from './src/styles/theme';
+import { StatusBar } from 'react-native';
 
-import App from './App';
-
-// registerRootComponent calls AppRegistry.registerComponent('main', () => App);
-// It also ensures that whether you load the app in Expo Go or in a native build,
-// the environment is set up appropriately
-registerRootComponent(App);
+export default function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
+        <StatusBar 
+          barStyle="light-content" 
+          backgroundColor={theme.colors.primary} 
+        />
+        <AppNavigator />
+      </AuthProvider>
+    </ThemeProvider>
+  );
+}
